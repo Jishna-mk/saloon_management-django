@@ -1,0 +1,57 @@
+{%extends "website/viewpage.html" %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+
+
+<section class="site-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-7 text-center">
+          <h2 class="section-title mb-2">Package Listed</h2>
+        </div>
+      </div>
+  
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Package Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Number of Applicants</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          {% for package in packages %}
+            <tr>
+              <td>{{ package.name }}</td>
+              <td>{{ package.category }}</td>
+              <td>{{ package.price }}</td>
+              <td>{{package.applypackage_set.all.count}} <a href="{% url 'all_applicants' package.pk %}"> View All Applictions</a></td>
+              {% if package.is_available %}
+                <td><span class="badge-success badge bg-success">Active</span></td>
+              {% else %}
+                <td><span class="badge-danger badge bg-danger">Not Active</span></td>
+              {% endif %}
+              <td>
+                <a href="{% url 'update_package' package.pk %}"><small>Update Package</small></a>
+              </td>
+              <td>
+                <a href="{% url 'delete_package' package.pk %}" class="text-danger" onclick="return confirm('Are you sure you want to delete this stay?')">
+                  <small>Delete Package</small>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  {% endblock %} 

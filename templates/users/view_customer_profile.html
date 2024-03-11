@@ -1,0 +1,18 @@
+{%extends "website/viewpage.html" %}
+
+{% block content %}
+<div class="container col-md-6 mx-auto" style="border: 1px solid rgb(131, 91, 4); margin-top: 100px;">
+<h1>{{ user.username }}'s Profile</h1>
+{% if customer_profile.photo %}
+    <img src="{{ customer_profile.photo.url }}" alt="{{ user.username }}'s Profile Photo">
+{% endif %}
+<p><strong>Location:</strong> {{ customer_profile.location }}</p>
+<p><strong>Phone Number:</strong> {{ customer_profile.phone_number }}</p>
+<p><strong>Age:</strong> {{ customer_profile.age }}</p>
+
+
+</div>
+{% endblock %}
+
+
+

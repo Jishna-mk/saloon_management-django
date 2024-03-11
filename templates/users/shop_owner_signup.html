@@ -1,0 +1,43 @@
+{%extends "users/customer_signup.html"%}
+{%block content%}
+<div class="container col-md-6 mx-auto mt-5 mb-5" style="padding-top: 80px;">
+<h2 class="mb-4">Sign Up (As Shop Owner)</h2>
+            <form method="post"  action="#" class="p-4 border rounded">
+              {% csrf_token %}
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Username</label>
+                  <input type="text" id="fname" name="username" class="form-control" placeholder="Username">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Email</label>
+                  <input type="text" id="fname" name="email" class="form-control" placeholder="Email address">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Password</label>
+                  <input type="password" id="fname" name="password1" class="form-control" placeholder="Password">
+                </div>
+              </div>
+              <div class="row form-group mb-4">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">Re-Type Password</label>
+                  <input type="password" id="fname" name="password2" class="form-control" placeholder="Re-type Password">
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Sign Up" class="btn px-4 btn-primary text-white">
+                </div>
+              </div>
+              <p>Already have an account <a href="{% url 'login' %}">Login Here</a></p>
+              <a href="{% url 'customer_signup' %}">Register as Customer</a><br>
+              
+            </form>
+
+          </div>            
+{%endblock%}

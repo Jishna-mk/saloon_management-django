@@ -1,0 +1,90 @@
+{% extends "website/viewpage.html" %}
+
+{% block content %}
+<style>
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container label {
+  width: 150px; /* Adjust the width as needed */
+  margin-right: 10px; /* Add space between label and input field */
+}
+
+.input-container input,
+.input-container select,
+.input-container textarea {
+  flex: 1; /* Take remaining space */
+  border-radius: 10px;
+}
+
+
+</style>
+  <div class="container mt-5 col-md-6" style="padding-top: 80px;">
+    <div class="card p-4">
+      <h2 class="text-center mb-4">Add Package</h2>
+
+      <form method="post" enctype="multipart/form-data" class="form-container">
+        {% csrf_token %}
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.price.label_tag }}
+            {{ form.price }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.duration.label_tag }}
+            {{ form.duration }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.discount_percentage.label_tag }}
+            {{ form.discount_percentage }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-container">
+            {{ form.is_available.label_tag }}
+            {{ form.is_available }}
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Package</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

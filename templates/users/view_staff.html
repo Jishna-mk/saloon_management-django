@@ -1,0 +1,26 @@
+{% extends "website/viewpage.html" %}
+
+{% block content %}
+<div class="container " style="padding-top: 80px;">
+  <h1>All Staff Profiles</h1>
+  <div class="row">
+    {% for profile in profiles %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        {% if profile.photo %}
+        <img src="{{ profile.photo.url }}" class="card-img-top" alt="{{ profile.username }}'s Photo" height="300">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">Staff name :{{ profile.username }}</h5>
+          <p class="card-text"><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+          <p class="card-text"><strong>Location:</strong> {{ profile.location }}</p>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "website/viewpage.html" %}
+
+{% block content %}
+<div class="conatiner col-md-6 mx-auto p-5" style=" border: 1px solid rgb(226, 214, 73); margin-top: 100px;">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+{%endblock%}

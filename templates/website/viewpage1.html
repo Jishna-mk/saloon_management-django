@@ -1,0 +1,127 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Barber X - Barber Shop Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+        <title>View page</title>
+        <!--<link rel="stylesheet" href="{%static '/css/anim.css' %}"> !-->
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="{%static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+        <link href="{%static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+        <link href="{%static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+        <!-- Template Stylesheet -->
+        <link href="{%static 'css/style.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Top Bar Start -->
+        <div class="top-bar d-none d-md-block">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="top-bar-left">
+                            <div class="text">
+                                <h2>8:00 - 9:00</h2>
+                                <p>Opening Hour Mon - Fri</p>
+                            </div>
+                            <div class="text">
+                                <h2>+123 456 7890</h2>
+                                <p>Call Us For Appointment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="top-bar-right">
+                            <div class="social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top Bar End -->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Saloon <span>X</span></a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_customer %}
+                                {% if request.user.customer_profile %}
+                                    <a href="{% url 'view_profile' %}" class="nav-item nav-link">View Profile</a>
+                                {% else %}
+                                    <a href="{% url 'customer_profile' %}" class="nav-item nav-link">Create Profile</a>
+                                {% endif %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="packageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Packages
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="packageDropdown">
+                                        <a class="dropdown-item" href="{% url 'packages_list' %}">View Packages</a>
+                                        <a class="dropdown-item" href="{% url 'applied_package' %}">Manage Packages</a>
+                                    </div>
+                                </li>
+                            {% endif %}
+                            
+                            {% if request.user.is_shop_owner %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="packageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Packages
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="packageDropdown">
+                                        <a class="dropdown-item" href="{% url 'add_packages' %}">Add Packages</a>
+                                        <a class="dropdown-item" href="{% url 'packages_list' %}">List Packages</a>
+                                        <a class="dropdown-item" href="{% url 'manage_package' %}">Manage Packages</a>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    
+                        <a href="{% url 'logout' %}" class="nav-item nav-link">Log out</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+        <br><br><br>
+{% block content %}
+  <h1 class="text-center">welcome to saloon</h1>
+<div class="load">
+    
+  </div>  
+
+{% endblock %}
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</html>

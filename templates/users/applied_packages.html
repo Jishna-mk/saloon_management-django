@@ -1,0 +1,49 @@
+{%extends "website/viewpage.html" %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+
+<section class="site-section">
+    <div class="container" style="padding-top: 80px;">
+
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-7 text-center">
+          <h2 class="section-title mb-2">Applied Packages</h2>
+        </div>
+      </div>
+      
+      <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Package Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price (Rs)</th>
+                <th scope="col">Duration </th>
+                <th scope="col">Discount Percentage</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for package in packages %}
+            <tr>
+                <td>{{ package.package.name }}</td>
+                <td>{{ package.package.category }}</td>
+                <td>{{ package.package.price |intcomma }}</td>
+                <td>{{ package.package.duration | format_duration }}</td>
+                <td>{{ package.package.discount_percentage }}</td>
+                <td>{{ package.status }}</td>
+                <td>
+                    <a href="{% url 'package_details' package.package.pk %}"><small>View Package</small></a>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+  </section>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{%extends "website/viewpage.html" %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+  <div class="container mt-5" style="padding-top: 80px;">
+    <h2 class="text-center mb-4">Available Packages List</h2>
+
+  <div class="packages-list row">
+    {% for package in packages %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if package.image %}
+                    <img src="{{ package.image.url }}" class="card-img-top" alt="{{ package.name }}" style="height: 250px;">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">{{ package.name }}</h4>
+                    <p class="card-text">Duration: {{ package.duration | format_duration }}</p>
+                    <p class="card-text">Price: Rs.{{ package.price|intcomma }}</p>
+                    <p class="card-text">Discount Percentage {{ package.discount_percentage }}</p>
+                    <a class="btn btn-primary btn-sm" href="{% url 'package_details' package.id %}">View Details</a>
+                </div>
+                
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

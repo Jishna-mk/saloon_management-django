@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            padding-top: 20px;
+        }
+
+        #main-content {
+            margin-left: 250px;
+            padding: 15px;
+        }
+
+        .table th {
+            background:#86B817;
+            color: rgb(87, 62, 62);
+            text-align: center;
+            padding: 10px;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        .table td {
+            text-align: center;
+            padding: 5px;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        #contact {
+            min-height: 90vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #main-content h3 {
+            margin-top: 50px;
+        }
+        button{
+            background-color: #ea4141;
+            border-radius: 5px;
+            border: none;
+            padding: 5px;
+        }
+        .approve{
+            background-color: #41a9ea;
+            border-radius: 5px;
+            border: none;
+            padding: 5px;
+        }
+        .count-box {
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .total-users-box {
+            background-color: #ed7c3f; 
+            height: 20vh;
+            width: 20vw;
+            display: flex;
+            flex-direction: row;
+        }
+        .total-turfs-box {
+            background-color: #17bdcc; 
+            height: 20vh;
+            width: 20vw;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .total-bookings-box {
+            background-color: #28a745; 
+            height: 20vh;
+            width: 20vw;
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+    <ul>
+        <li><h3><a href="#">Dashboard</a></h3></li><br>
+    
+        <li><a href="{%url 'admin_signout' %}">Signout</a></li>
+        <li><a href="{%url 'index' %}">Back to home</a></li>
+        <!-- Add more links as needed -->
+    </ul>
+    </div>
+
+    <div id="main-content">
+        {% block content %}
+        <h2 class="text-center">Admin Dashboard</h2>
+        <main id="main">
+            <div class="row">
+                <!-- Total Users Count Box -->
+                <div class="col-md-4">
+                    <div class="count-box total-turfs-box">
+                        <p>Total Staff Count: {{ staff_count }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="count-box total-users-box">
+                        <p>Total Customer Count: {{ customer_count }}</p> 
+                    </div>
+                </div>
+               
+               
+            </div>
+
+            <!-- Managers List Section -->
+            <section id="managers-list" class="managers-list">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-header mt-5">
+                        <h3 class="mt-5">Staff List</h3>
+                    </div>
+                    <div class="row gx-lg-0 gy-4">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered managers-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        
+                                        <th>Phone Number</th>
+                                        <th>Location</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for staff_profile in staff_profiles %}
+                                    <tr>
+                                        <td>{{ staff_profile.username }}</td>
+                                        <td>{{ staff_profile.phone_number }} </td>
+                                        <td>{{ staff_profile.location }}</td>
+                                      
+                                        
+                                    </tr>
+                                    {% endfor %} 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="managers-list" class="managers-list">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-header mt-5">
+                        <h3 class="mt-5">Customers List</h3>
+                    </div>
+                    <div class="row gx-lg-0 gy-4">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered managers-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        
+                                        <th>Phone Number</th>
+                                        <th>Location</th>
+                                        <th>Age</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for customer_profile in customer_profiles %}
+                                    <tr>
+                                        <td>{{ customer_profile.user.username }}</td>
+                                        <td>{{ customer_profile.phone_number }} </td>
+                                        <td>{{ customer_profile.location }}</td>
+                                        <td>{{ customer_profile.age }}</td>
+                                      
+                                        
+                                    </tr>
+                                    {% endfor %} 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS and additional scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+

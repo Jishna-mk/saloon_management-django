@@ -1,0 +1,29 @@
+{%extends "users/customer_signup.html"%}
+{%block content%}
+<div class="container col-md-6 mx-auto " style="padding-top: 80px;">
+<h2 class="mb-4">Log In</h2>
+<form method="post" action="#" class="p-4 border rounded">
+  {% csrf_token %}
+  <div class="row form-group">
+    <div class="col-md-12 mb-3 mb-md-0">
+      <label class="text-black" for="fname">Username</label>
+      <input type="text" id="fname" name="username" class="form-control" placeholder="Username">
+    </div>
+  </div>
+  <div class="row form-group mb-4">
+    <div class="col-md-12 mb-3 mb-md-0">
+      <label class="text-black" for="fname">Password</label>
+      <input type="password" id="fname" name="password" class="form-control" placeholder="Password">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-12">
+      <input type="submit" value="Log In" class="btn px-4 btn-primary text-white">
+    </div>
+  </div>
+  <a href="{% url 'customer_signup' %}">Register as Customer</a><br>
+  <a href="{% url 'shop_owner_signup' %}">Register as Shop Owner</a><br>
+</form>
+</div>
+{%endblock%}

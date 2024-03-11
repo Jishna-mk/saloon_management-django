@@ -1,0 +1,57 @@
+{%extends "website/viewpage.html" %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block content %}
+
+<section class="site-section">
+    <div class="container" style="padding-top: 150px;">
+
+      <div class="row mb-5 justify-content-center">
+        <div class="card mx-auto" style="width: 76rem;">
+            <!-- <img src="..." class="card-img-top" alt=".."> -->
+            <div class="card-body">
+                <h5 class="card-title mb-3">All Applicants for {{package.name}}</h5>
+        
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Mobile Number</th>
+                            <th scope="col">Applied Date</th>
+                            <th scope="col">Actions</th>
+                            
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        {% for applicant in applicants %}
+                        <tr>
+                            <td>{{ applicant.user.username }}</td>
+                            <td>{{ applicant.user.customer_profile.age }}</td>
+                            <td>{{ applicant.user.customer_profile.location }}</td>
+                            <td>{{ applicant.user.customer_profile.phone_number }}</td>
+                            <td>{{ applicant.timestamp }}</td>
+                            <td>
+                                <form method="post" action="{% url 'approve_application' applicant.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success" name="action" value="approve">Approve</button>
+                                </form>
+                
+                                <form method="post" action="{% url 'decline_application' applicant.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger" name="action" value="decline">Decline</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+  </section>
+
+{% endblock %}
